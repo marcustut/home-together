@@ -1,7 +1,7 @@
 {
-  "name": "React PWA",
-  "short_name": "reactpwa",
-  "description": "Starter kit for modern web applications",
+  "name": "Home Together",
+  "short_name": "home-together",
+  "description": "A collaborative management app for housemates",
   "theme_color": "#ffffff",
   "icons": [
     {
