@@ -11,6 +11,9 @@ import HotKeys from '@/sections/HotKeys';
 import Notifications from '@/sections/Notifications';
 import SW from '@/sections/SW';
 import Sidebar from '@/sections/Sidebar';
+import Auth from '@/pages/Auth';
+import { UrqlProvider } from '@/lib/urql';
+import { SupabaseProvider, supabase } from '@/lib/supabase';
 
 function App() {
   return (
@@ -19,11 +22,21 @@ function App() {
       <Notifications />
       <HotKeys />
       <SW />
-      <BrowserRouter>
-        <Header />
-        <Sidebar />
-        <Pages />
-      </BrowserRouter>
+      <SupabaseProvider>
+        <UrqlProvider>
+          <BrowserRouter>
+            {supabase.auth.user() ? (
+              <>
+                <Header />
+                <Sidebar />
+                <Pages />
+              </>
+            ) : (
+              <Auth />
+            )}
+          </BrowserRouter>
+        </UrqlProvider>
+      </SupabaseProvider>
     </Fragment>
   );
 }

@@ -1,0 +1,15 @@
+query Users($first: Int, $after: Cursor, $filter: UsersFilter, $orderBy: [UsersOrderBy!]) {
+  users: usersCollection(first: $first, after: $after, filter: $filter, orderBy: $orderBy) {
+    edges {
+      user: node {
+        id
+        phoneNumber
+        displayName
+        avatarUrl
+        movedInAt
+        movingOutAt
+        updatedAt
+      }
+    }
+  }
+}

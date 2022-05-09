@@ -1,0 +1,388 @@
+scalar BigInt
+
+"""
+Boolean expression comparing fields on type "BigInt"
+"""
+input BigIntFilter {
+  eq: BigInt
+  gt: BigInt
+  gte: BigInt
+  lt: BigInt
+  lte: BigInt
+  neq: BigInt
+}
+
+"""
+Boolean expression comparing fields on type "Boolean"
+"""
+input BooleanFilter {
+  eq: Boolean
+  gt: Boolean
+  gte: Boolean
+  lt: Boolean
+  lte: Boolean
+  neq: Boolean
+}
+
+scalar Cursor
+
+scalar Date
+
+"""
+Boolean expression comparing fields on type "Date"
+"""
+input DateFilter {
+  eq: Date
+  gt: Date
+  gte: Date
+  lt: Date
+  lte: Date
+  neq: Date
+}
+
+scalar Datetime
+
+"""
+Boolean expression comparing fields on type "Datetime"
+"""
+input DatetimeFilter {
+  eq: Datetime
+  gt: Datetime
+  gte: Datetime
+  lt: Datetime
+  lte: Datetime
+  neq: Datetime
+}
+
+"""
+Boolean expression comparing fields on type "Float"
+"""
+input FloatFilter {
+  eq: Float
+  gt: Float
+  gte: Float
+  lt: Float
+  lte: Float
+  neq: Float
+}
+
+"""
+Boolean expression comparing fields on type "Int"
+"""
+input IntFilter {
+  eq: Int
+  gt: Int
+  gte: Int
+  lt: Int
+  lte: Int
+  neq: Int
+}
+
+scalar JSON
+
+"""
+Boolean expression comparing fields on type "JSON"
+"""
+input JSONFilter {
+  eq: JSON
+  neq: JSON
+}
+
+"""The root type for creating and mutating data"""
+type Mutation {
+  """Deletes zero or more records from the collection"""
+  deleteFromSchemaMigrationsCollection(
+    """Restricts the mutation's impact to records matching the critera"""
+    filter: SchemaMigrationsFilter
+
+    """
+    The maximum number of records in the collection permitted to be affected
+    """
+    atMost: Int! = 1
+  ): SchemaMigrationsDeleteResponse!
+
+  """Deletes zero or more records from the collection"""
+  deleteFromUsersCollection(
+    """Restricts the mutation's impact to records matching the critera"""
+    filter: UsersFilter
+
+    """
+    The maximum number of records in the collection permitted to be affected
+    """
+    atMost: Int! = 1
+  ): UsersDeleteResponse!
+
+  """
+  Adds one or more `SchemaMigrationsInsertResponse` records to the collection
+  """
+  insertIntoSchemaMigrationsCollection(objects: [SchemaMigrationsInsertInput!]!): SchemaMigrationsInsertResponse
+
+  """Adds one or more `UsersInsertResponse` records to the collection"""
+  insertIntoUsersCollection(objects: [UsersInsertInput!]!): UsersInsertResponse
+
+  """Updates zero or more records in the collection"""
+  updateSchemaMigrationsCollection(
+    """
+    Fields that are set will be updated for all records matching the `filter`
+    """
+    set: SchemaMigrationsUpdateInput!
+
+    """Restricts the mutation's impact to records matching the critera"""
+    filter: SchemaMigrationsFilter
+
+    """
+    The maximum number of records in the collection permitted to be affected
+    """
+    atMost: Int! = 1
+  ): SchemaMigrationsUpdateResponse!
+
+  """Updates zero or more records in the collection"""
+  updateUsersCollection(
+    """
+    Fields that are set will be updated for all records matching the `filter`
+    """
+    set: UsersUpdateInput!
+
+    """Restricts the mutation's impact to records matching the critera"""
+    filter: UsersFilter
+
+    """
+    The maximum number of records in the collection permitted to be affected
+    """
+    atMost: Int! = 1
+  ): UsersUpdateResponse!
+}
+
+"""Defines a per-field sorting order"""
+enum OrderByDirection {
+  AscNullsFirst
+  AscNullsLast
+  DescNullsFirst
+  DescNullsLast
+}
+
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
+"""The root type for querying data"""
+type Query {
+  """A pagable collection of type `SchemaMigrations`"""
+  schemaMigrationsCollection(
+    """Query the first `n` records in the collection"""
+    first: Int
+
+    """Query the last `n` records in the collection"""
+    last: Int
+
+    """Query values in the collection before the provided cursor"""
+    before: Cursor
+
+    """Query values in the collection after the provided cursor"""
+    after: Cursor
+
+    """Filters to apply to the results set when querying from the collection"""
+    filter: SchemaMigrationsFilter
+
+    """Sort order to apply to the collection"""
+    orderBy: [SchemaMigrationsOrderBy!]
+  ): SchemaMigrationsConnection
+
+  """A pagable collection of type `Users`"""
+  usersCollection(
+    """Query the first `n` records in the collection"""
+    first: Int
+
+    """Query the last `n` records in the collection"""
+    last: Int
+
+    """Query values in the collection before the provided cursor"""
+    before: Cursor
+
+    """Query values in the collection after the provided cursor"""
+    after: Cursor
+
+    """Filters to apply to the results set when querying from the collection"""
+    filter: UsersFilter
+
+    """Sort order to apply to the collection"""
+    orderBy: [UsersOrderBy!]
+  ): UsersConnection
+}
+
+type SchemaMigrations {
+  version: String!
+}
+
+type SchemaMigrationsConnection {
+  edges: [SchemaMigrationsEdge!]!
+  pageInfo: PageInfo!
+}
+
+type SchemaMigrationsDeleteResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [SchemaMigrations!]!
+}
+
+type SchemaMigrationsEdge {
+  cursor: String!
+  node: SchemaMigrations
+}
+
+input SchemaMigrationsFilter {
+  version: StringFilter
+}
+
+input SchemaMigrationsInsertInput {
+  version: String
+}
+
+type SchemaMigrationsInsertResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [SchemaMigrations!]!
+}
+
+input SchemaMigrationsOrderBy {
+  version: OrderByDirection
+}
+
+input SchemaMigrationsUpdateInput {
+  version: String
+}
+
+type SchemaMigrationsUpdateResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [SchemaMigrations!]!
+}
+
+"""
+Boolean expression comparing fields on type "String"
+"""
+input StringFilter {
+  eq: String
+  gt: String
+  gte: String
+  lt: String
+  lte: String
+  neq: String
+}
+
+scalar Time
+
+"""
+Boolean expression comparing fields on type "Time"
+"""
+input TimeFilter {
+  eq: Time
+  gt: Time
+  gte: Time
+  lt: Time
+  lte: Time
+  neq: Time
+}
+
+scalar UUID
+
+"""
+Boolean expression comparing fields on type "UUID"
+"""
+input UUIDFilter {
+  eq: UUID
+  neq: UUID
+}
+
+type Users {
+  id: UUID!
+  phoneNumber: String!
+  displayName: String
+  avatarUrl: String
+  movedInAt: Datetime
+  movingOutAt: Datetime
+  updatedAt: Datetime
+}
+
+type UsersConnection {
+  edges: [UsersEdge!]!
+  pageInfo: PageInfo!
+}
+
+type UsersDeleteResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [Users!]!
+}
+
+type UsersEdge {
+  cursor: String!
+  node: Users
+}
+
+input UsersFilter {
+  id: UUIDFilter
+  phoneNumber: StringFilter
+  displayName: StringFilter
+  avatarUrl: StringFilter
+  movedInAt: DatetimeFilter
+  movingOutAt: DatetimeFilter
+  updatedAt: DatetimeFilter
+}
+
+input UsersInsertInput {
+  id: UUID
+  phoneNumber: String
+  displayName: String
+  avatarUrl: String
+  movedInAt: Datetime
+  movingOutAt: Datetime
+  updatedAt: Datetime
+}
+
+type UsersInsertResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [Users!]!
+}
+
+input UsersOrderBy {
+  id: OrderByDirection
+  phoneNumber: OrderByDirection
+  displayName: OrderByDirection
+  avatarUrl: OrderByDirection
+  movedInAt: OrderByDirection
+  movingOutAt: OrderByDirection
+  updatedAt: OrderByDirection
+}
+
+input UsersUpdateInput {
+  id: UUID
+  phoneNumber: String
+  displayName: String
+  avatarUrl: String
+  movedInAt: Datetime
+  movingOutAt: Datetime
+  updatedAt: Datetime
+}
+
+type UsersUpdateResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [Users!]!
+}
